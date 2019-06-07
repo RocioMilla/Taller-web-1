@@ -1,14 +1,19 @@
 package ar.edu.unlam.tallerweb1.dao;
 
+import ar.edu.unlam.tallerweb1.modelo.Commerce;
+import ar.edu.unlam.tallerweb1.modelo.Item;
 import ar.edu.unlam.tallerweb1.modelo.Message;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository("ItemDao")
 public class ItemDaoImpl implements ItemDao {
@@ -36,4 +41,87 @@ public class ItemDaoImpl implements ItemDao {
         return rows;
 
     }
+    
+    
+	public List<Item> obtenerProductoPorMarca(String marca) {
+		
+		   final Session session = sessionFactory.getCurrentSession();
+		
+		   List<Item> productos = session.createCriteria(Item.class)
+				   .add(Restrictions.eq("brand", marca))
+				   .list();
+		   
+		   
+		return productos;
+		   
+		
+		
+	}
+
+
+	@Override
+	public void crearItems() {
+        final Session session = sessionFactory.getCurrentSession();
+        
+        Item ayudin =new Item();
+        ayudin.setBrand("ayudin");
+		
+
+		
+		
+		Commerce walmart=new Commerce();
+		walmart.setName("walmart");
+		walmart.setLatitude(-34.67624068932531);
+		walmart.setLongitude(-58.55517028807671);
+		
+		Commerce jumbo=new Commerce();
+		jumbo.setName("jumbo");
+		jumbo.setLatitude(-34.696100213550224);
+		jumbo.setLongitude(-58.562610974620014);
+		
+		Commerce coto=new Commerce();
+		coto.setName("coto");
+		coto.setLatitude(-34.694094417308314);
+		coto.setLongitude(-58.57249123051896);
+		
+		
+		Commerce carrefour=new Commerce();
+		carrefour.setName("carrefour");
+		carrefour.setLatitude(-34.709537794286426);
+		carrefour.setLongitude(-58.54431420444564);
+		
+		Set<Commerce>commerces=new HashSet<>();
+		
+
+		
+		commerces.add(walmart);
+		commerces.add(jumbo);
+		commerces.add(coto);
+		
+		
+	
+		ayudin.setCommerces(commerces);
+
+		
+		session.save(ayudin);
+		
+		
+		
+		
+
+		Item pepsi =new Item();
+		pepsi.setBrand("pepsi");
+		
+		Set<Commerce>commerces1=new HashSet<>();
+		
+		commerces1.add(carrefour);
+		commerces1.add(coto);
+		
+		pepsi.setCommerces(commerces1);
+		
+
+		session.save(pepsi);
+		
+	}
+
 }
