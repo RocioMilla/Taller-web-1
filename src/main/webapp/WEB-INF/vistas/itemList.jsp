@@ -19,40 +19,6 @@
 	</head>
 	<body>
 	
-	  <div id="map" style="width: 600px; height: 300px;"></div>
-<script type="text/javascript">
- 
-  var jsontext = '${jsonString}';
-
-
-  var locations = JSON.parse(jsontext);
-
-
-
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 10,
-      center: new google.maps.LatLng(-34.7504785, -58.5846362),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
-
-    var infowindow = new google.maps.InfoWindow();
-
-    var marker, i;
-
-    for (i = 0; i < locations.length; i++) {  
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i]["latitude"], locations[i]["longitude"]),
-        map: map
-      });
-
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infowindow.setContent(locations[i]["name"]);
-          infowindow.open(map, marker);
-        }
-      })(marker, i));
-    }
-  </script>
 		<div class="container">
 			<br>
 				<c:choose>
@@ -63,6 +29,13 @@
         			<c:forEach items="${items}"  var="item">
         				<div id="itemId${item.id}" class="card text-white bg-info mb-3" style="max-width: 20rem;">
   							<div class="card-header">Producto #${item.brand}</div>
+  						<div class="card-body">
+    							<h5 class="card-title"><span class="text-capitalize"><img src="${item.urlImage}" width="200"></span></h5>
+    							<a href="/proyecto-limpio-spring/mostrarEnMapa?comercios=${encode}">mostrarEnMapa</a>
+    							<p class="card-text">
+    								Descripcion: <span>${item.description}</span>
+    							</p>
+  							</div>
   			
   							</div>
 					

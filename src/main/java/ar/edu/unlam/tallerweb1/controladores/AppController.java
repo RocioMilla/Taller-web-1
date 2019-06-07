@@ -22,6 +22,8 @@ import com.google.gson.Gson;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -63,7 +65,7 @@ public class AppController {
     
     
 
-    
+    //ayudin o pepsi
 	@RequestMapping(path="/buscarProductoPorMarca",method=RequestMethod.GET)
 	public ModelAndView buscarProducto() {
 		
@@ -75,39 +77,49 @@ public class AppController {
 	}
     
 	@RequestMapping(path="/ComerciosEncontrados",method=RequestMethod.GET)
-	public ModelAndView detalleProducto(@RequestParam String marca) {
+	public ModelAndView detalleProducto(@RequestParam String marca) throws UnsupportedEncodingException {
 		
 		  ModelMap model = new ModelMap();
 		
 		List<Item>listaDeProductos=itemService.obtenerProductoPorMarca(marca);
 		
 
-		
+		//obtengo los comercios del primer producto de la lista
 		Set<Commerce>comercios=	 listaDeProductos.get(0).getCommerces();
 		
+		//convierte set en list
 		List <Commerce> comerciosList = new ArrayList <Commerce> (comercios);
 		
 		
-		// Covert List to Json
+		// Convierto la lista en una cadena json
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(comerciosList);
 		
 
 		  model.put("items", listaDeProductos);
 		  model.put("comercios", comerciosList);
-		  model.put("jsonString", jsonString);
+		//  model.put("jsonString", jsonString);
 	
-		
+		  //codifico los espacios de la cadena json para luego poder pasarlo como parametro por url
+		    String encode= URLEncoder.encode(jsonString,"UTF-8");
+		    
+		    model.put("encode", encode);
+		    
+		    
 		return new ModelAndView("itemList",model);
 			//	return new ModelAndView("resultado",model);
 	}
 	
+	
 
-	
-	
-	
-	
-	
-	
-    
+	@RequestMapping(path="/mostrarEnMapa",method=RequestMethod.GET)
+	public ModelAndView mostrarEnMapa(String comercios) {
+		
+		 ModelMap model = new ModelMap();
+
+		model.put("comercios", comercios);
+
+		return new ModelAndView("mostrarEnMapa",model);
+	}
+ 
 }

@@ -65,8 +65,8 @@ public class ItemDaoImpl implements ItemDao {
         
         Item ayudin =new Item();
         ayudin.setBrand("ayudin");
-		
-
+		ayudin.setUrlImage("https://perfumeriaspigmento.com.ar/media/catalog/product/cache/image/620x678/e9c3970ab036de70892d86c6d221abfe/7/9/79879.jpg");
+		ayudin.setDescription("AYUDIN LAVANDINA ANDINA MULTISUP ORIGIN 2 Litros");
 		
 		
 		Commerce walmart=new Commerce();
@@ -111,14 +111,14 @@ public class ItemDaoImpl implements ItemDao {
 
 		Item pepsi =new Item();
 		pepsi.setBrand("pepsi");
-		
+		pepsi.setUrlImage("https://www.superama.com.mx/Content/images/products/img_large/0750103131001L.jpg");
+		pepsi.setDescription("Gaseosa Pepsi 1,5 Lt");
 		Set<Commerce>commerces1=new HashSet<>();
 		
 		commerces1.add(carrefour);
 		commerces1.add(coto);
 		
 		pepsi.setCommerces(commerces1);
-		
 
 		session.save(pepsi);
 		

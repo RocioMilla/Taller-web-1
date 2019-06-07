@@ -10,9 +10,14 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemId;
     private String brand;
+    private String urlImage;
+    private String description;
     
     
-    @ManyToMany(cascade=CascadeType.ALL)  
+  
+
+
+	@ManyToMany(cascade=CascadeType.ALL)  
     @JoinTable(name="commerce_item", joinColumns=@JoinColumn(name="itemId"), inverseJoinColumns=@JoinColumn(name="commerceId"))   
     public Set<Commerce> commerces;
     @ManyToOne
@@ -53,4 +58,27 @@ public class Item {
     public void setCommerces(Set<Commerce> commerces) {
         this.commerces = commerces;
     }
+    
+    public Long getItemId() {
+  		return itemId;
+  	}
+
+  	public void setItemId(Long itemId) {
+  		this.itemId = itemId;
+  	}
+
+  	public String getUrlImage() {
+  		return urlImage;
+  	}
+
+  	public void setUrlImage(String urlImage) {
+  		this.urlImage = urlImage;
+  	}
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }
