@@ -11,10 +11,9 @@
 <body>
   <div id="map" style="width: 800px; height: 600px;"></div>
 
-${texto}
   <script type="text/javascript">
  
-  var jsontext = '${comercios}';
+  var jsontext = '${jsonString}';
 
 
   var locations = JSON.parse (jsontext);

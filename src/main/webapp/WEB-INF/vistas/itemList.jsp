@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -7,6 +8,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+
 <html>
 	<head>
 	
@@ -26,35 +29,35 @@
         			<h4><span>No hay resultados</span></h4>
     			</c:when>
     			<c:otherwise>
-        			<c:forEach items="${items}"  var="item">
+ 	
+ 										<c:forEach items="${items}"  var="item">
         				<div id="itemId${item.id}" class="card text-white bg-info mb-3" style="max-width: 20rem;">
   							<div class="card-header">Producto #${item.brand}</div>
   						<div class="card-body">
     							<h5 class="card-title"><span class="text-capitalize"><img src="${item.urlImage}" width="200"></span></h5>
-    							<a href="/proyecto-limpio-spring/mostrarEnMapa?comercios=${encode}">mostrarEnMapa</a>
     							<p class="card-text">
     								Descripcion: <span>${item.description}</span>
+    							</p>
+    							
+    								<p class="card-text"> Comercios:<br>
+    										<c:forEach items="${item.commerces}"  var="item2">
+        								 	${item2.name}
+        								 	
+        								 	<a href="/proyecto-limpio-spring/mostrarEnMapa?nombre=${item2.name}&latitud=${item2.latitude}&longitud=	${item2.longitude}">Mostrar en mapa</a><br>
+        								 	
+
+ 										</c:forEach>
+ 					
     							</p>
   							</div>
   			
   							</div>
-					
+
  					</c:forEach>
- 					
- 					<c:forEach items="${comercios}"  var="item">
-        				<div id="itemId${item.id}" class="card text-white bg-info mb-3" style="max-width: 20rem;">
-  							<div class="card-header">Comercios #${item.name}</div>
-  							<div class="card-body">
-    							<h5 class="card-title">Comercio: <span class="text-capitalize">${item.name}</span></h5>
-    							<p class="card-text">
-    								Distancia: <span>Kms</span>
-    							</p>
-  							</div>
-						</div>
- 					</c:forEach>
+
     			</c:otherwise>
 				</c:choose>
 					</div>
-		</div>
+		
 	</body>
 </html>

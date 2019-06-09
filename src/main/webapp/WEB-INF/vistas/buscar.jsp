@@ -16,7 +16,7 @@
 </head>
 <body>
 
-  <form:form  action="ComerciosEncontrados" method="GET">
+  <form:form  action="ProductosEncontrados" method="GET">
 <p><label>Ingrese marca de producto:  <input type="text" name="marca"class="form-control"/> </label></p>
 <button class="btn btn-primary" Type="Submit">Buscar</button>
 </form:form>

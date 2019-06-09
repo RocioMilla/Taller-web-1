@@ -69,6 +69,15 @@ public class ItemDaoImpl implements ItemDao {
 		ayudin.setDescription("AYUDIN LAVANDINA ANDINA MULTISUP ORIGIN 2 Litros");
 		
 		
+	    Item ayudin1 =new Item();
+        ayudin1.setBrand("ayudin");
+		ayudin1.setUrlImage("http://www.servibol.com.ar/image/stores/33/cache/data/lavandina-ayudin-doble-rendimiento-bot-4l-cleansytec-23184-MLA20243633005_022015-O-500x500.jpg");
+		ayudin1.setDescription("AYUDIN triple accion 1 litro");
+		
+		
+		
+		
+		
 		Commerce walmart=new Commerce();
 		walmart.setName("walmart");
 		walmart.setLatitude(-34.67624068932531);
@@ -101,13 +110,13 @@ public class ItemDaoImpl implements ItemDao {
 		
 	
 		ayudin.setCommerces(commerces);
-
+	
 		
 		session.save(ayudin);
+		session.save(ayudin1);
 		
 		
-		
-		
+
 
 		Item pepsi =new Item();
 		pepsi.setBrand("pepsi");
@@ -117,7 +126,7 @@ public class ItemDaoImpl implements ItemDao {
 		
 		commerces1.add(carrefour);
 		commerces1.add(coto);
-		
+		ayudin1.setCommerces(commerces1);
 		pepsi.setCommerces(commerces1);
 
 		session.save(pepsi);
